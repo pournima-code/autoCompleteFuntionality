@@ -8,7 +8,7 @@ const filterOptions = createFilterOptions({
 });
 
 const App = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState([]);
   // const [options, setOptions] = useState(null);
 
 
@@ -35,7 +35,7 @@ const App = () => {
   return (
     <div style={{ padding: '20px', maxWidth: '400px', margin: 'auto' }}>
       <Autocomplete
-        // multiple
+        multiple
         options={options}
         filterOptions={filterOptions}
         getOptionLabel={(option) => option.label}
@@ -45,9 +45,14 @@ const App = () => {
           <TextField {...params} label="Select Framework" variant="outlined" />
         )}
       />
-      {selectedOption && (
+        {selectedOption.length > 0 && (
         <div style={{ marginTop: '20px' }}>
-          <strong>Selected:</strong> {selectedOption.label}
+          <strong>Selected:</strong>
+          <ul>
+            {selectedOption.map((option, index) => (
+              <li key={index}>{option.label}</li>
+            ))}
+          </ul>
         </div>
       )}
     </div>
